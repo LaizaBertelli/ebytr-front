@@ -1,0 +1,39 @@
+/* stylelint-disable declaration-property-value-blacklist */
+.login_main {
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px rgb(189, 189, 189);
+  box-sizing: border-box;
+  width: 20%;
+  height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login_main p {
+  color: rgb(161, 161, 161);
+  font-size: .7em;
+  text-align: center;
+}
+
+.login_forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.input {
+  border: none;
+  border-bottom: 2px solid rgb(146, 18, 118);
+}
+
+.label {
+  display: block;
+  color: rgb(97, 97, 97);
+  font-size: .7em;
+  margin-top: 10px;
+}
