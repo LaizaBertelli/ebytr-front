@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Components/Button';
 import '../Styles/Pages/Login.css';
-import requestLogin from '../Services/requests';
+import { requestLogin } from '../Services/requests';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 function Login() {
   const navigate = useNavigate();
-  const [isLogged, setIsLogged] = useState(false);
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [password, setPassword] = useState('');
@@ -24,11 +23,14 @@ function Login() {
   };
 
   const handleClick = async () => {
-    const { token } = await requestLogin(email, password);
-    if (token) {
-      setIsLogged(true);
-      localStorage.setItem('token', token);
+    try {
+      const { token, user } = await requestLogin(email, password);
+
+      localStorage.setItem('user', JSON.stringify({ token, ...user }));
       localStorage.setItem('logged', true);
+      navigate('/tasks');
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -52,8 +54,6 @@ function Login() {
     }
   });
 
-  if (isLogged) navigate('/tasks');
-
   return (
     <div className="login_main">
       <div className="login_forms">
@@ -64,7 +64,7 @@ function Login() {
           <label className="label" htmlFor="password">Password</label>
           <input className="input" id="password" type="password" name="password" onKeyUp={(event) => handleChange(event.target)} />
         </div>
-        <Button disabled={isButtonDisabled} text="Entrar" onClick={handleClick} />
+        <Button customClass="login_button" disabled={isButtonDisabled} text="Entrar" onClick={handleClick} />
       </div>
       <p>Não tem uma conta? Cadastre-se aqui</p>
     </div>
