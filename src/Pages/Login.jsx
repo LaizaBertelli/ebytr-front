@@ -28,6 +28,7 @@ function Login() {
     if (token) {
       setIsLogged(true);
       localStorage.setItem('token', token);
+      localStorage.setItem('logged', true);
     }
   };
 
