@@ -1,16 +1,62 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Components/Button';
-import Input from '../Components/Input';
 import '../Styles/Pages/Login.css';
 
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
 function Login() {
+  const navigate = useNavigate();
+  const [isLogged, setIsLogged] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [password, setPassword] = useState('');
+  const [isePassValid, setIsPassValid] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const handleChange = (target) => {
+    if (target.name === 'email') {
+      setEmail(target.value);
+    }
+    if (target.name === 'password') setPassword(target.value);
+  };
+
+  useEffect(() => {
+    if (EMAIL_REGEX.test(email)) {
+      setIsEmailValid(true);
+    } else {
+      setIsEmailValid(false);
+    }
+
+    if (password.length > 4) {
+      setIsPassValid(true);
+    } else {
+      setIsPassValid(false);
+    }
+
+    if (isEmailValid && isePassValid) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  });
+
+  if (isLogged) navigate('/tasks');
+
   return (
     <div className="login_main">
       <div className="login_forms">
         <h1>Login</h1>
-        <Input id="email" type="email" name="email" value="" label="Email" />
-        <Input id="password" type="password" name="password" value="" label="Password" />
-        <Button text="Entrar" />
+        <div>
+          <label className="label" ftmlFor="email">
+            Email
+            <input className="input" id="email" type="email" name="email" onKeyUp={(event) => handleChange(event.target)} />
+          </label>
+          <label className="label" htmlFor="password">Password</label>
+          <input className="input" id="password" type="password" name="password" onKeyUp={(event) => handleChange(event.target)} />
+        </div>
+        <Button disabled={isButtonDisabled} text="Entrar" onClick={() => setIsLogged(true)} />
       </div>
       <p>Não tem uma conta? Cadastre-se aqui</p>
     </div>
