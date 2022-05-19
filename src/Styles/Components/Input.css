@@ -1,0 +1,13 @@
+/* stylelint-disable declaration-property-value-blacklist */
+
+.input {
+  border: none;
+  border-bottom: 2px solid rgb(146, 18, 118);
+}
+
+.label {
+  display: block;
+  color: rgb(97, 97, 97);
+  font-size: .7em;
+  margin-top: 10px;
+}
