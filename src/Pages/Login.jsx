@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Components/Button';
 import '../Styles/Pages/Login.css';
+import requestLogin from '../Services/requests';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
@@ -20,6 +21,12 @@ function Login() {
       setEmail(target.value);
     }
     if (target.name === 'password') setPassword(target.value);
+  };
+
+  const handleClick = async () => {
+    const token = await requestLogin(email, password);
+    console.log(token);
+    setIsLogged(true);
   };
 
   useEffect(() => {
@@ -49,14 +56,12 @@ function Login() {
       <div className="login_forms">
         <h1>Login</h1>
         <div>
-          <label className="label" ftmlFor="email">
-            Email
-            <input className="input" id="email" type="email" name="email" onKeyUp={(event) => handleChange(event.target)} />
-          </label>
+          <label className="label" ftmlFor="email">Email</label>
+          <input className="input" id="email" type="email" name="email" onKeyUp={(event) => handleChange(event.target)} />
           <label className="label" htmlFor="password">Password</label>
           <input className="input" id="password" type="password" name="password" onKeyUp={(event) => handleChange(event.target)} />
         </div>
-        <Button disabled={isButtonDisabled} text="Entrar" onClick={() => setIsLogged(true)} />
+        <Button disabled={isButtonDisabled} text="Entrar" onClick={handleClick} />
       </div>
       <p>Não tem uma conta? Cadastre-se aqui</p>
     </div>
