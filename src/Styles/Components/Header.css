@@ -1,0 +1,9 @@
+.header {
+  background-color: rgb(146, 18, 118);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: white;
+  box-sizing: border-box;
+  padding-left: 40px;
+}
