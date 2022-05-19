@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
+import NewTask from './NewTask';
 import '../Styles/Components/TaskCard.css';
+import '../Styles/Components/Button.css';
 
 function TaskCard({ title, description, status }) {
   const handleEdit = () => {
@@ -11,6 +13,11 @@ function TaskCard({ title, description, status }) {
   const handleDelete = () => {
     console.log('clicked delete');
   };
+
+  if (status === 'new') {
+    return (<NewTask />);
+  }
+
   return (
     <div className="task_card">
       <h3>{ title }</h3>
