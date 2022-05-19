@@ -24,9 +24,11 @@ function Login() {
   };
 
   const handleClick = async () => {
-    const token = await requestLogin(email, password);
-    console.log(token);
-    setIsLogged(true);
+    const { token } = await requestLogin(email, password);
+    if (token) {
+      setIsLogged(true);
+      localStorage.setItem('token', token);
+    }
   };
 
   useEffect(() => {
