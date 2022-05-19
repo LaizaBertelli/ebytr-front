@@ -1,6 +1,6 @@
 /* stylelint-disable declaration-property-value-blacklist */
 
-.button {
+.login_button {
   background-color: rgb(146, 18, 118);
   color: white;
   font-size: 1em;
@@ -12,6 +12,28 @@
   margin-top: 30px;
 }
 
-.button:disabled {
+.login_button:disabled {
   background-color: rgb(128, 100, 122);
+}
+
+.edit_button {
+  border: none;
+  background-color: rgb(96, 38, 189);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1em;
+  letter-spacing: .1em;
+  font-weight: 600;
+}
+
+.delete_button {
+  border: none;
+  background-color: rgb(173, 41, 18);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1em;
+  letter-spacing: .1em;
+  font-weight: 600;
 }
