@@ -1,0 +1,12 @@
+.cards_container {
+  box-shadow: 0px 0px 5px 1px rgb(189, 189, 189);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 70%;
+  display: grid;
+  gap: 10px 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
