@@ -20,6 +20,7 @@ function Tasks() {
     const { id } = JSON.parse(localStorage.getItem('user'));
     const getTasks = async (userId) => {
       const data = await requestTasks(userId);
+      data.tasks.push({ status: 'new' });
       setTasks(data.tasks);
     };
 
