@@ -3,12 +3,14 @@ import axios from 'axios';
 const requestLogin = async (email, password) => {
   const token = axios({
     method: 'post',
-    url: 'https://lb-task-manager.herokuapp.com/login/',
+    url: 'http://localhost:3080/login/',
     data: {
       email,
       password,
     },
-  }).then((response) => response);
+  })
+    .then((response) => response.data)
+    .catch((error) => error.code);
 
   return token;
 };
