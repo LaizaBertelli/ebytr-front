@@ -11,7 +11,6 @@ function TasksProvider({ children }) {
     const getTasks = async () => {
       const { id } = JSON.parse(localStorage.getItem('user'));
       const data = await requestTasks(id);
-      data.tasks.push({ status: 'new' });
       setTasks(data.tasks);
     };
     getTasks().catch(console.error);
