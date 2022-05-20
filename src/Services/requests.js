@@ -21,3 +21,10 @@ export const requestTasks = async (id) => {
 
   return data;
 };
+
+export const requestDeleteTask = async (id) => {
+  await axios({
+    method: 'delete',
+    url: `http://localhost:3080/tasks/${id}`,
+  });
+};
